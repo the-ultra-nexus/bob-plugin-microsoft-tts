@@ -25,6 +25,20 @@ export function escapeXml(value: string): string {
 import type { SynthesisRequest } from '../types';
 
 /**
+ * 从语音名称中提取区域标识（locale）前缀。
+ *
+ * voice 名格式为 `<locale>-<Name>Neural`（如 `en-GB-RyanNeural`、`zh-CN-XiaoxiaoNeural`），
+ * 取前 5 个字符作为 `xml:lang`。方言语音（如 `zh-CN-liaoning-XiaobeiNeural`）同样取 `zh-CN`。
+ *
+ * @param voice - 语音名称
+ * @returns 区域标识；voice 不匹配已知格式时返回 `null`（调用方回退 `options.locale`）
+ */
+function voiceToLocale(voice: string): string | null {
+    const match = voice.match(/^([a-z]{2,3}-[A-Z]{2})/);
+    return match ? match[1] : null;
+}
+
+/**
  * 根据语音合成参数构建完整的 SSML 字符串。
  *
  * 构建逻辑：
@@ -32,6 +46,8 @@ import type { SynthesisRequest } from '../types';
  *   同时设置 `styledegree="2.0"` 以增强情感表现力；
  * - 否则生成标准 SSML，仅包含 `<prosody>` 韵律控制标签。
  * - 所有文本和属性值均经过 XML 转义，防止注入问题。
+ * - `xml:lang` 跟随语音名称的区域前缀（如用户选择 `en-GB-RyanNeural` 时为 `en-GB`），
+ *   与 voice 的 locale 保持一致；voice 无匹配前缀时回退 `options.locale`。
  *
  * @param options - SSML 构建选项
  * @returns 完整的 SSML XML 字符串，可直接发送给 TTS 服务
@@ -39,8 +55,8 @@ import type { SynthesisRequest } from '../types';
  * @example
  * ```ts
  * buildSsml({
- *   locale: 'zh-CN',
- *   voice: 'zh-CN-XiaoxiaoNeural',
+ *   locale: 'en-US',
+ *   voice: 'en-GB-RyanNeural',
  *   text: '你好世界',
  *   rate: '+0%',
  *   pitch: '+0Hz',
@@ -55,7 +71,7 @@ export function buildSsml(options: SynthesisRequest): string {
     const volume = options.volume || '+0%';
     const escapedText = escapeXml(options.text);
     const escapedVoice = escapeXml(options.voice);
-    const escapedLocale = escapeXml(options.locale);
+    const escapedLocale = escapeXml(voiceToLocale(options.voice) || options.locale);
 
     if (options.style) {
         return `<speak xmlns="http://www.w3.org/2001/10/synthesis" 

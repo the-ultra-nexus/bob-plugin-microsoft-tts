@@ -38,7 +38,7 @@
 | 配置 | 类型 | 默认 | 说明 |
 |------|------|------|------|
 | 合成方案 (provider) | menu | `edge-tts` | 选择 TTS Provider |
-| zh-CN / zh-TW / en-US / ja-JP / ko-KR 语音 | menu | 各语种主流女声 | 按个人偏好挑男声/女声 |
+| zh-CN / zh-TW / en-* / ja-JP / ko-KR 语音 | menu | 各语种主流女声 | 按个人偏好挑男声/女声；`en-*语音` 含美式与英式（Ryan / Sonia / Thomas / Libby / Maisie） |
 | 语速 (rate) | menu | `+0%` | `-50% ~ +50%`；觉得拖沓 → `+10%` ~ `+25%` |
 | 音调 (pitch) | menu | `+0Hz` | `-50Hz ~ +50Hz` |
 | 音量 (volume) | menu | `+0%` | `-50% ~ +50%` |
