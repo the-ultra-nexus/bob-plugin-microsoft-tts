@@ -164,7 +164,7 @@
     {
       "identifier": "en-US-speaker",
       "type": "menu",
-      "title": "en-US语音",
+      "title": "en-*语音",
       "defaultValue": "en-US-JennyNeural",
       "menuValues": [
         {
@@ -266,9 +266,29 @@
         {
           "title": "Roger - en-US-RogerNeural - Male",
           "value": "en-US-RogerNeural"
+        },
+        {
+          "title": "Ryan - en-GB-RyanNeural - Male",
+          "value": "en-GB-RyanNeural"
+        },
+        {
+          "title": "Sonia - en-GB-SoniaNeural - Female",
+          "value": "en-GB-SoniaNeural"
+        },
+        {
+          "title": "Thomas - en-GB-ThomasNeural - Male",
+          "value": "en-GB-ThomasNeural"
+        },
+        {
+          "title": "Libby - en-GB-LibbyNeural - Female",
+          "value": "en-GB-LibbyNeural"
+        },
+        {
+          "title": "Maisie - en-GB-MaisieNeural - Female",
+          "value": "en-GB-MaisieNeural"
         }
       ],
-      "desc": "切换en-US语音角色"
+      "desc": "切换en-*语音角色"
     },
     {
       "identifier": "ja-JP-speaker",
