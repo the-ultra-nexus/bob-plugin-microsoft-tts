@@ -1,3 +1,4 @@
+# [1.0.0](https://github.com/the-ultra-nexus/bob-plugin-microsoft-tts/compare/v1.0.1...v1.0.0) (2026-08-14)
 
 
 ## v1.0.1(2026-8-14)
